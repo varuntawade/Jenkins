@@ -5,7 +5,7 @@ set -x
 for plugin in $(cat plugins.txt); do \
     java -jar /home/varun/Jekins-cli/jenkins-cli.jar \
     -s http://localhost:8080/ \
-    -auth $JENKINS_USER:$JENKINS_PASSWORD \
+    -auth ${{ secrets.JENKINS_USER }}:${{ secrets.JENKINS_PASSWORD }} \
     install-plugin $plugin; \
 done
-java -jar /home/varun/Jekins-cli/jenkins-cli.jar -s http://laptop-vanv0g5o/:8080/ -auth $JENKINS_USER:$JENKINS_PASSWORD safe-restart
+java -jar /home/varun/Jekins-cli/jenkins-cli.jar -s http://laptop-vanv0g5o/:8080/ -auth ${{ secrets.JENKINS_USER }}:${{ secrets.JENKINS_PASSWORD }} safe-restart
