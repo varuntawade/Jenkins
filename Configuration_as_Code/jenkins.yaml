@@ -1,0 +1,56 @@
+# This yaml file is used to automatically configure the jobs.
+
+jenkins:
+  systemMessage: "Jenkins configured automatically by Jenkins Configuration as Code plugin\n\n"
+  globalNodeProperties:
+    - envVars:
+        env:
+          - key: VARIABLE1
+            value: localhost
+          - key: VARIABLE2
+            value: 8080
+
+tool:
+  git:
+    installations:
+      - name: git
+        home: git
+
+  maven:
+    installations:
+      - name: maven
+        home: /usr/bin/mvn
+
+  jdk:
+    installations:
+      - name: java11
+        home: /usr/bin/java
+
+credentials:
+  system:
+    domainCredentials:
+      - credentials:
+          - usernamePassword:
+              scope: GLOBAL
+              id: my-credential
+              description: "My Username/Password Credential"
+              username: myusername
+              password: mypassword
+
+ 
+jobs:
+  - script: >
+      pipelineJob('pipeline-job') {
+          definition {
+              cpsScm {
+                  scm {
+                      git {
+                          remote {
+                              github('varuntawade/Jenkins')
+                          }
+                      }
+                  }
+                  scriptPath('Configuration_as_Code/pipeline_job.groovy')
+              }
+          }
+      }
