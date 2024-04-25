@@ -33,5 +33,5 @@ jobs:
       - name: Run a multi-line script
         run: |
           echo Add other actions to build,
-          ${pwd}
+          ${{ github.workspace }}
           ssh github@LAPTOP-VANV0G5O cat /var/lib/jenkins/config/jenkins.yaml
